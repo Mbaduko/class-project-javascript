@@ -1,5 +1,5 @@
 // Array of numbers from 1 to 20
-const numbers = Array.from({length: 20}, (_, i) => i + 1);
+const numbers = Array.from({ length: 20 }, (_, i) => i + 1);
 
 // Task 1: Sum of all numbers in the array
 function sumArray(arr) {
@@ -51,8 +51,7 @@ document.getElementById("duplicatesOutput").textContent = "Unique Numbers: " + r
 
 // Task 9: Find median of the array
 function medianArray(arr) {
-    const sorted = arr.sort((a, b) => a - b);
-    console.log(sorted);
+    const sorted = arr.slice().sort((a, b) => a - b);
     const mid = Math.floor(sorted.length / 2);
     return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
@@ -65,315 +64,331 @@ function multiplyByTwo(arr) {
 document.getElementById("multipliedOutput").textContent = "Multiplied by 2: " + multiplyByTwo(numbers).join(", ");
 
 // Array of 20 names
-const names = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ian", "Jack",
-               "Kathy", "Leo", "Mia", "Nina", "Oscar", "Paul", "Quinn", "Rita", "Sam", "Tina"];
+const namesArray = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ian", "Jack",
+    "Kathy", "Leo", "Mia", "Nina", "Oscar", "Paul", "Quinn", "Rita", "Sam", "Tina"];
 
-// Task 11: Print each name on a new line
-function printNames(arr) {
-    return arr.join('<br>');
+// 11. Print each name on a new line
+function printNames() {
+    const names = namesArray.join("<br>");
+    document.getElementById("printNamesOutput").innerHTML = names;
 }
-document.getElementById('namesOutput').innerHTML = printNames(names);
+printNames();
 
-// Task 12: Sort names alphabetically
-function sortNames(arr) {
-    return arr.sort();
+// 12. Sort names alphabetically
+function sortNamesAlphabetically() {
+    return namesArray.slice().sort();
 }
-document.getElementById("sortedNamesOutput").textContent = "Sorted Names: " + sortNames(names).join(", ");
+const sortedNames = sortNamesAlphabetically();
+document.getElementById("sortedNamesOutput").textContent = `Sorted Names: ${sortedNames.join(", ")}`;
 
-// Task 13: Check if all numbers in an array are positive
-function allPositive(arr) {
-    return arr.every(num => num > 0);
+// 13. Check if a specific name exists
+const specificName = "Alice"; // Change this value to check for different names
+function checkNameExists(name) {
+    return namesArray.includes(name);
 }
-document.getElementById("allPositiveOutput").textContent = "All numbers positive: " + allPositive(numbers);
+const exists = checkNameExists(specificName);
+document.getElementById("nameExistsOutput").textContent = `${specificName} exists: ${exists}`;
 
-// Task 14: Calculate the factorial of a number (e.g., 5)
-function factorial(n) {
-    return n <= 1 ? 1 : n * factorial(n - 1);
+// 14. Find the longest name
+function findLongestName() {
+    return namesArray.reduce((longest, current) => {
+        return current.length > longest.length ? current : longest;
+    }, "");
 }
-document.getElementById("factorialOutput").textContent = "Factorial of 5: " + factorial(5);
+const longestName = findLongestName();
+document.getElementById("longestNameOutput").textContent = `Longest name: ${longestName}`;
 
-// Task 15: Count occurrences of each element in an array
-function countOccurrences(arr) {
-    return arr.reduce((countMap, num) => {
-        countMap[num] = (countMap[num] || 0) + 1;
-        return countMap;
-    }, {});
+// 15. Find names that start with a specific letter
+const specificLetter = "A"; // Change this value to check for different letters
+function findNamesStartingWith(letter) {
+    return namesArray.filter(name => name.startsWith(letter));
 }
-document.getElementById("countOccurrencesOutput").textContent = "Occurrences: " + JSON.stringify(countOccurrences(numbers));
+const namesStartingWith = findNamesStartingWith(specificLetter);
+document.getElementById("namesStartingWithOutput").textContent = `Names starting with "${specificLetter}": ${namesStartingWith.join(", ")}`;
 
-// Task 16: Check if a number is prime (e.g., 7)
-function isPrime(num) {
-    if (num <= 1) return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
+// 16. Convert all names to uppercase
+function convertNamesToUppercase() {
+    return namesArray.map(name => name.toUpperCase());
+}
+const uppercaseNames = convertNamesToUppercase();
+document.getElementById("uppercaseNamesOutput").textContent = `Uppercase Names: ${uppercaseNames.join(", ")}`;
+
+// 17. Remove a specific name
+const nameToRemove = "Bob"; // Change this value to remove a different name
+function removeName(name) {
+    return namesArray.filter(n => n !== name);
+}
+const remainingNames = removeName(nameToRemove);
+document.getElementById("removeNameOutput").textContent = `Remaining Names: ${remainingNames.join(", ")}`;
+
+// 18. Count names containing the letter "a"
+function countNamesWithALetter() {
+    return namesArray.filter(name => name.includes("a")).length;
+}
+const count = countNamesWithALetter();
+document.getElementById("countNamesWithALetterOutput").textContent = `Count of names containing "a": ${count}`;
+
+// 19. Concatenate all names into a single string
+function concatenateNames() {
+    return namesArray.join(", ");
+}
+const concatenatedNames = concatenateNames();
+document.getElementById("concatenatedNamesOutput").textContent = `Concatenated Names: ${concatenatedNames}`;
+
+// 20. Reverse the order of the names
+function reverseNames() {
+    return namesArray.slice().reverse();
+}
+const reversedNames = reverseNames();
+document.getElementById("reversedNamesOutput").textContent = `Reversed Names: ${reversedNames.join(", ")}`;
+
+// 21. Create a JavaScript object representing a person
+const person = {
+    name: "John Doe",
+    age: 30,
+    occupation: "Software Developer"
+};
+
+// 22. Function to format person information
+function formatPersonInfo(person) {
+    return `Name: ${person.name}, Age: ${person.age}, Occupation: ${person.occupation}`;
+}
+document.getElementById("personInfoOutput").textContent = formatPersonInfo(person);
+
+// 23. Function to add a new property to an existing object
+function addProperty(obj, key, value) {
+    obj[key] = value;
+}
+addProperty(person, "hobby", "Photography");
+document.getElementById("addPropertyOutput").textContent = `Updated Person Info: ${formatPersonInfo(person)}`;
+
+// 24. Function to remove a property from an existing object
+function removeProperty(obj, key) {
+    delete obj[key];
+}
+removeProperty(person, "age");
+document.getElementById("removePropertyOutput").textContent = `Updated Person Info (Age Removed): ${formatPersonInfo(person)}`;
+
+// 25. Function to list all properties and values of a JavaScript object
+function listProperties(obj) {
+    return Object.entries(obj).map(([key, value]) => `${key}: ${value}`).join(", ");
+}
+document.getElementById("listPropertiesOutput").textContent = `Person Properties: ${listProperties(person)}`;
+
+// 26. Function to merge two objects into one
+const additionalInfo = { address: "123 Main St", phone: "555-1234" };
+function mergeObjects(obj1, obj2) {
+    return { ...obj1, ...obj2 };
+}
+const mergedPerson = mergeObjects(person, additionalInfo);
+document.getElementById("mergeObjectsOutput").textContent = `Merged Person Info: ${listProperties(mergedPerson)}`;
+
+// 27. Function to check if a property exists in an object
+function propertyExists(obj, key) {
+    return key in obj;
+}
+const occupationExists = propertyExists(mergedPerson, "occupation");
+document.getElementById("propertyExistsOutput").textContent = `Occupation exists: ${occupationExists}`;
+
+// 28. Function to clone an object without referencing the original one
+function cloneObject(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+const clonedPerson = cloneObject(mergedPerson);
+document.getElementById("cloneObjectOutput").textContent = `Cloned Person Info: ${listProperties(clonedPerson)}`;
+
+// 29. Function to loop through an array of objects and print a specific property
+const peopleArray = [
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 28 },
+    { name: "Charlie", age: 22 }
+];
+function printPropertyFromArray(arr, property) {
+    return arr.map(obj => obj[property]).join(", ");
+}
+document.getElementById("printPropertyFromArrayOutput").textContent = `Names in Array: ${printPropertyFromArray(peopleArray, "name")}`;
+
+// 30. Function to update a specific property of an object based on user input
+function updateProperty(obj, key, value) {
+    if (key in obj) {
+        obj[key] = value;
     }
-    return true;
 }
-document.getElementById("isPrimeOutput").textContent = "Is 7 prime: " + isPrime(7);
+updateProperty(clonedPerson, "name", "Jane Doe");
+document.getElementById("updatePropertyOutput").textContent = `Updated Cloned Person Info: ${listProperties(clonedPerson)}`;
 
-// Task 17: Convert an array of strings to uppercase
-function toUpperCaseArray(arr) {
-    return arr.map(str => str.toUpperCase());
+// Previous code...
+
+const sampleString = "Hello, World!";
+const stringWithNumbers = "Hello 123, World 456!";
+const stringToInsert = " Beautiful";
+
+// 31. Function to reverse a string
+function reverseString(str) {
+    return str.split("").reverse().join("");
 }
-document.getElementById("uppercaseStringsOutput").textContent = "Uppercase Strings: " + toUpperCaseArray(names).join(", ");
+document.getElementById("reverseStringOutput").textContent = `Input: "${sampleString}" | Reversed String: "${reverseString(sampleString)}"`;
 
-// Task 18: Find all prime numbers in an array
-function findPrimes(arr) {
-    return arr.filter(isPrime);
-}
-document.getElementById("findPrimesOutput").textContent = "Prime Numbers: " + findPrimes(numbers).join(", ");
-
-// Task 19: Convert an array of numbers to their square roots
-function squareRootsArray(arr) {
-    return arr.map(num => Math.sqrt(num));
-}
-document.getElementById("squareRootsOutput").textContent = "Square Roots: " + squareRootsArray(numbers).join(", ");
-
-// Continue adding more functions for tasks 20 to 50, following the same format.
-
-// Task 13: Check if all numbers in an array are positive
-function allPositive(arr) {
-    return arr.every(num => num > 0);
-}
-document.getElementById("allPositiveOutput").textContent = "All numbers positive: " + allPositive(numbers);
-
-// Task 14: Calculate the factorial of a number (e.g., 5)
-function factorial(n) {
-    return n <= 1 ? 1 : n * factorial(n - 1);
-}
-document.getElementById("factorialOutput").textContent = "Factorial of 5: " + factorial(5);
-
-// Task 15: Count occurrences of each element in an array
-function countOccurrences(arr) {
-    return arr.reduce((countMap, num) => {
-        countMap[num] = (countMap[num] || 0) + 1;
-        return countMap;
-    }, {});
-}
-document.getElementById("countOccurrencesOutput").textContent = "Occurrences: " + JSON.stringify(countOccurrences(numbers));
-
-// Task 16: Check if a number is prime (e.g., 7)
-function isPrime(num) {
-    if (num <= 1) return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
-    }
-    return true;
-}
-document.getElementById("isPrimeOutput").textContent = "Is 7 prime: " + isPrime(7);
-
-// Task 17: Convert an array of strings to uppercase
-function toUpperCaseArray(arr) {
-    return arr.map(str => str.toUpperCase());
-}
-document.getElementById("uppercaseStringsOutput").textContent = "Uppercase Strings: " + toUpperCaseArray(names).join(", ");
-
-// Task 18: Find all prime numbers in an array
-function findPrimes(arr) {
-    return arr.filter(isPrime);
-}
-document.getElementById("findPrimesOutput").textContent = "Prime Numbers: " + findPrimes(numbers).join(", ");
-
-// Task 19: Convert an array of numbers to their square roots
-function squareRootsArray(arr) {
-    return arr.map(num => Math.sqrt(num));
-}
-document.getElementById("squareRootsOutput").textContent = "Square Roots: " + squareRootsArray(numbers).join(", ");
-
-// Task 20: Sum of all even numbers in an array
-function sumOfEvens(arr) {
-    return arr.filter(num => num % 2 === 0).reduce((sum, num) => sum + num, 0);
-}
-document.getElementById("sumOfEvensOutput").textContent = "Sum of Even Numbers: " + sumOfEvens(numbers);
-
-// Task 21: Check if a string is a palindrome
-function isPalindrome(str) {
-    const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
-    return cleanedStr === cleanedStr.split("").reverse().join("");
-}
-document.getElementById("isPalindromeOutput").textContent = "Is 'madam' a palindrome: " + isPalindrome("madam");
-
-// Task 22: Find the second largest number in an array
-function secondLargest(arr) {
-    const sortedUnique = [...new Set(arr)].sort((a, b) => b - a);
-    return sortedUnique.length >= 2 ? sortedUnique[1] : null;
-}
-document.getElementById("secondLargestOutput").textContent = "Second Largest: " + secondLargest(numbers);
-
-// Task 23: Find the longest string in an array
-function longestString(arr) {
-    return arr.reduce((longest, str) => str.length > longest.length ? str : longest, "");
-}
-document.getElementById("longestStringOutput").textContent = "Longest String: " + longestString(names);
-
-// Task 24: Reverse the words in a sentence
-function reverseWords(sentence) {
-    return sentence.split(" ").reverse().join(" ");
-}
-document.getElementById("reverseWordsOutput").textContent = "Reversed Words: " + reverseWords("Hello World");
-
-// Task 25: Sort an array of numbers in descending order
-function sortDescending(arr) {
-    return arr.slice().sort((a, b) => b - a);
-}
-document.getElementById("sortDescendingOutput").textContent = "Descending Order: " + sortDescending(numbers).join(", ");
-
-// Task 26: Find common elements between two arrays
-function commonElements(arr1, arr2) {
-    return arr1.filter(value => arr2.includes(value));
-}
-document.getElementById("commonElementsOutput").textContent = "Common Elements: " + commonElements(numbers, [3, 5, 7]).join(", ");
-
-// Task 27: Check if a number is a perfect square
-function isPerfectSquare(num) {
-    return Number.isInteger(Math.sqrt(num));
-}
-document.getElementById("isPerfectSquareOutput").textContent = "Is 16 a perfect square: " + isPerfectSquare(16);
-
-// Task 28: Find all unique values in an array
-function uniqueValues(arr) {
-    return [...new Set(arr)];
-}
-document.getElementById("uniqueValuesOutput").textContent = "Unique Values: " + uniqueValues(numbers).join(", ");
-
-// Task 29: Convert a string to camelCase
-function toCamelCase(str) {
-    return str.replace(/[-_\s]+(.)?/g, (_, chr) => chr ? chr.toUpperCase() : '');
-}
-document.getElementById("camelCaseOutput").textContent = "Camel Case: " + toCamelCase("hello world");
-
-// Task 30: Find the mode(s) of an array
-function findMode(arr) {
-    const count = {};
-    arr.forEach(num => count[num] = (count[num] || 0) + 1);
-    const maxFreq = Math.max(...Object.values(count));
-    return Object.keys(count).filter(num => count[num] === maxFreq).map(Number);
-}
-document.getElementById("findModeOutput").textContent = "Mode(s): " + findMode(numbers).join(", ");
-
-// Task 31: Calculate the sum of an array's elements
-function sumArray(arr) {
-    return arr.reduce((sum, num) => sum + num, 0);
-}
-document.getElementById("sumArrayOutput").textContent = "Sum: " + sumArray(numbers);
-
-// Task 32: Check if a number is within a specified range
-function isInRange(num, min, max) {
-    return num >= min && num <= max;
-}
-document.getElementById("isInRangeOutput").textContent = "Is 5 in range 1-10: " + isInRange(5, 1, 10);
-
-// Task 33: Capitalize the first letter of each word in a sentence
-function capitalizeWords(sentence) {
-    return sentence.replace(/\b\w/g, char => char.toUpperCase());
-}
-document.getElementById("capitalizeWordsOutput").textContent = "Capitalized: " + capitalizeWords("hello world");
-
-// Task 34: Count vowels in a string
+// 32. Function to count the number of vowels in a given string
 function countVowels(str) {
-    return (str.match(/[aeiou]/gi) || []).length;
+    return (str.match(/[aeiouAEIOU]/g) || []).length;
 }
-document.getElementById("countVowelsOutput").textContent = "Vowel Count: " + countVowels("hello world");
+document.getElementById("countVowelsOutput").textContent = `Input: "${sampleString}" | Number of Vowels: ${countVowels(sampleString)}`;
 
-// Task 35: Merge two arrays and remove duplicates
-function mergeUnique(arr1, arr2) {
-    return [...new Set([...arr1, ...arr2])];
+// 33. Function to convert a string to uppercase without using built-in methods
+function toUpperCaseWithoutBuiltIn(str) {
+    let upperStr = '';
+    for (let i = 0; i < str.length; i++) {
+        const charCode = str.charCodeAt(i);
+        if (charCode >= 97 && charCode <= 122) {
+            upperStr += String.fromCharCode(charCode - 32);
+        } else {
+            upperStr += str[i];
+        }
+    }
+    return upperStr;
 }
-document.getElementById("mergeUniqueOutput").textContent = "Merged Unique: " + mergeUnique(numbers, [5, 10, 15]).join(", ");
+document.getElementById("toUpperCaseOutput").textContent = `Input: "${sampleString}" | Uppercase String: "${toUpperCaseWithoutBuiltIn(sampleString)}"`;
 
-// Task 36: Generate an array of even numbers up to a given number
-function generateEvens(n) {
-    return Array.from({ length: Math.floor(n / 2) }, (_, i) => (i + 1) * 2);
+// 34. Function to find the length of a string without using .length
+function stringLength(str) {
+    let length = 0;
+    while (str[length] !== undefined) {
+        length++;
+    }
+    return length;
 }
-document.getElementById("generateEvensOutput").textContent = "Even Numbers: " + generateEvens(10).join(", ");
+document.getElementById("stringLengthOutput").textContent = `Input: "${sampleString}" | Length of String: ${stringLength(sampleString)}`;
 
-// Task 37: Reverse the characters in each word of a sentence
-function reverseCharactersInWords(sentence) {
-    return sentence.split(" ").map(word => word.split("").reverse().join("")).join(" ");
+// 35. Function to replace all spaces with hyphens in a string
+function replaceSpacesWithHyphens(str) {
+    return str.replace(/ /g, '-');
 }
-document.getElementById("reverseCharactersOutput").textContent = "Reversed Characters: " + reverseCharactersInWords("hello world");
+document.getElementById("replaceSpacesOutput").textContent = `Input: "${sampleString}" | Hyphenated String: "${replaceSpacesWithHyphens(sampleString)}"`;
 
-// Task 38: Convert an array of numbers to percentages
-function toPercentages(arr) {
-    return arr.map(num => `${(num * 100).toFixed(2)}%`);
+// 36. Function to extract the first 10 characters from a string
+function extractFirst10Characters(str) {
+    return str.slice(0, 10);
 }
-document.getElementById("percentagesOutput").textContent = "Percentages: " + toPercentages([0.1, 0.5, 0.75]).join(", ");
+document.getElementById("extractFirst10Output").textContent = `Input: "${sampleString}" | First 10 Characters: "${extractFirst10Characters(sampleString)}"`;
 
-// Task 39: Calculate the average of an array of numbers
-function averageArray(arr) {
-    return arr.reduce((sum, num) => sum + num, 0) / arr.length;
+// 37. Function to find and replace a word in a string
+function findAndReplaceWord(str, target, replacement) {
+    const regex = new RegExp(target, 'g');
+    return str.replace(regex, replacement);
 }
-document.getElementById("averageArrayOutput").textContent = "Average: " + averageArray(numbers);
+document.getElementById("findAndReplaceOutput").textContent = `Input: "${sampleString}" | Replaced String: "${findAndReplaceWord(sampleString, "World", "Everyone")}"`;
 
-// Task 40: Check if all elements in an array are unique
-function allUnique(arr) {
-    return new Set(arr).size === arr.length;
+// 38. Function to split a string into an array of words
+function splitStringIntoArray(str) {
+    return str.split(" ");
 }
-document.getElementById("allUniqueOutput").textContent = "All Unique: " + allUnique(numbers);
+document.getElementById("splitStringOutput").textContent = `Input: "${sampleString}" | Array of Words: [${splitStringIntoArray(sampleString).join(", ")}]`;
 
-// Task 41: Find the minimum and maximum numbers in an array
-function minMaxArray(arr) {
-    return { min: Math.min(...arr), max: Math.max(...arr) };
+// 39. Function to remove all numbers from a string
+function removeNumbersFromString(str) {
+    return str.replace(/[0-9]/g, '');
 }
-const minMax = minMaxArray(numbers);
-document.getElementById("minMaxOutput").textContent = "Min and Max: " + JSON.stringify(minMax);
+document.getElementById("removeNumbersOutput").textContent = `Input: "${stringWithNumbers}" | String without Numbers: "${removeNumbersFromString(stringWithNumbers)}"`;
 
-// Task 42: Remove all falsy values from an array
-function removeFalsy(arr) {
-    return arr.filter(Boolean);
+// 40. Function to insert another string starting at position 7
+function insertStringAtPosition(originalStr, stringToInsert, position) {
+    return originalStr.slice(0, position) + stringToInsert + originalStr.slice(position);
 }
-document.getElementById("removeFalsyOutput").textContent = "Truthy Values: " + removeFalsy([0, null, "hello", false, 42]).join(", ");
+document.getElementById("insertStringOutput").textContent = `Input: "${sampleString}" | String After Insertion: "${insertStringAtPosition(sampleString, stringToInsert, 7)}"`;
 
-// Task 43: Flatten a nested array
-function flattenArray(arr) {
-    return arr.flat(Infinity);
-}
-document.getElementById("flattenArrayOutput").textContent = "Flattened Array: " + flattenArray([1, [2, [3, [4]]]]).join(", ");
 
-// Task 44: Find the GCD of two numbers
-function gcd(a, b) {
-    while (b) [a, b] = [b, a % b];
-    return a;
+// 41. Change background color
+function changeBackgroundColor(color) {
+    document.body.style.backgroundColor = color;
+    document.getElementById('task41-answer').textContent = `Background color changed to ${color}.`;
 }
-document.getElementById("gcdOutput").textContent = "GCD of 12 and 18: " + gcd(12, 18);
 
-// Task 45: Check if a string contains only digits
-function isDigitsOnly(str) {
-    return /^\d+$/.test(str);
+// 42. Hide an HTML element
+function hideElement() {
+    const element = document.getElementById('task42-element');
+    element.style.display = 'none';
+    document.getElementById('task42-answer').textContent = 'Element has been hidden.';
 }
-document.getElementById("isDigitsOnlyOutput").textContent = "Only digits: " + isDigitsOnly("12345");
 
-// Task 46: Calculate the LCM of two numbers
-function lcm(a, b) {
-    return (!a || !b) ? 0 : Math.abs((a * b) / gcd(a, b));
+// 43. Create a new paragraph
+function createParagraph() {
+    const newParagraph = document.createElement('p');
+    newParagraph.textContent = 'This is a new paragraph.';
+    document.body.appendChild(newParagraph);
+    document.getElementById('task43-answer').textContent = 'A new paragraph has been created and added to the body.';
 }
-document.getElementById("lcmOutput").textContent = "LCM of 4 and 5: " + lcm(4, 5);
 
-// Task 47: Find the longest word in a sentence
-function longestWord(sentence) {
-    return sentence.split(" ").reduce((longest, word) => word.length > longest.length ? word : longest, "");
+// 44. Remove all list items
+function removeListItems() {
+    const list = document.getElementById('task44-list');
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+    document.getElementById('task44-answer').textContent = 'All list items have been removed.';
 }
-document.getElementById("longestWordOutput").textContent = "Longest Word: " + longestWord("The quick brown fox jumps over the lazy dog");
 
-// Task 48: Count Consonants
-function countConsonants(str) {
-    const consonants = str.match(/[^aeiou]/gi);
-    return consonants ? consonants.length : 0;
+// 45. Change text content of a specific element
+function changeTextContent(newText) {
+    const element = document.getElementById('task45-element');
+    element.textContent = newText;
+    document.getElementById('task45-answer').textContent = `Text content changed to: ${newText}.`;
 }
-const task48Output = countConsonants("Hello World! This is a test.");
-document.getElementById("countConsonantsOutput").innerText = `Number of consonants: ${task48Output}`;
 
-// Task 49: Find the Intersection of Two Arrays
-function findIntersection(arr1, arr2) {
-    return arr1.filter(value => arr2.includes(value));
+// 46. Toggle a CSS class
+function toggleCSSClass() {
+    const element = document.getElementById('task46-element');
+    element.classList.toggle('highlight');
+    document.getElementById('task46-answer').textContent = 'CSS class has been toggled.';
 }
-const task49Output = findIntersection([1, 2, 3, 4], [3, 4, 5, 6]);
-document.getElementById("findIntersectionOutput").innerText = `Intersection: ${task49Output}`;
 
-// Task 50: Check if a String is an Anagram
-function isAnagram(str1, str2) {
-    const sortString = (str) => str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
-    return sortString(str1) === sortString(str2);
+// 47. Count the number of divs
+function countDivs() {
+    const divCount = document.querySelectorAll('div').length;
+    document.getElementById('task47-answer').textContent = `Number of divs on the page: ${divCount}.`;
 }
-const task50Output = isAnagram("listen", "silent");
-document.getElementById("isAnagramOutput").innerText = `Are they anagrams? ${task50Output}`;
+
+// 48. Get input field value
+function displayInputValue() {
+    const inputValue = document.getElementById('task48-input').value;
+    document.getElementById('task48-answer').textContent = `Input value: ${inputValue}.`;
+}
+
+// 49. Create a table with borders
+function createTable() {
+    const table = document.createElement('table');
+    
+    // Apply styles for the table and cells
+    table.style.border = '1px solid black';
+    table.style.borderCollapse = 'collapse';
+    
+    for (let i = 0; i < 3; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < 3; j++) {
+            const cell = row.insertCell();
+            cell.textContent = (i * 3) + (j + 1); // Populate with numbers
+            cell.style.border = '1px solid black'; // Add border to each cell
+            cell.style.padding = '10px'; // Optional: add padding for better appearance
+        }
+    }
+    
+    // Clear previous table if exists
+    const answerParagraph = document.getElementById('task49-answer');
+    answerParagraph.innerHTML = 'A table with 3 rows and 3 columns has been created.<br>';
+    
+    // Append the table to the answer paragraph
+    answerParagraph.appendChild(table);
+}
+
+
+// 50. Validate form
+function validateForm() {
+    const name = document.getElementById('task50-name').value;
+    const email = document.getElementById('task50-email').value;
+    const password = document.getElementById('task50-password').value;
+    if (name && email && password) {
+        document.getElementById('task50-answer').textContent = 'Form is valid.';
+    } else {
+        document.getElementById('task50-answer').textContent = 'Please fill out all fields.';
+    }
+}
